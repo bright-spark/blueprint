@@ -217,9 +217,10 @@
     <link rel="stylesheet" href="css/pages/index.css?r=20230701" />
     <link rel="stylesheet" href="css/classes.css" />
     
-    <script>
+    <script async>
       navigator.serviceWorker.register("sw.js");
     </script>
+    
   </head>
 
   <body class="theme-dark color-theme-red">
@@ -478,17 +479,17 @@
       src="js/framework/framework7-bundle.min.js"
     ></script>
 
-    <script
+    <script defer
         type="text/javascript" 
         src="js/thorium.config.js"
     ></script>
 
-    <script
+    <script defer
       type="text/javascript"
       src="js/plugins/thorium.core.min.js"
     ></script>
 
-    <script>
+    <script async>
       if (typeof navigator.serviceWorker !== "undefined") {
         navigator.serviceWorker.register("sw.js");
       }
