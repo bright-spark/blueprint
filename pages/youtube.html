@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- BEGIN Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PZWWSYRHSF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-PZWWSYRHSF');
+    </script>
+    <!-- END Google tag (gtag.js) -->
+    
+  <title>YouTube</title>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="ho·ly | myo͞ozik">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0">
+  <style>
+    html, body, iframe {
+      margin: 0;
+      padding: 0;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      z-index: 999999;
+    }
+
+    iframe {
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!--<iframe title="YouTube video player" id="playlistiframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+
+  <iframe title="YouTube Video Player" id="playlistiframe" src="" allow="web-share; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" type="text/html" frameborder="0" allowfullscreen></iframe>
+  
+  <script>
+    // Array of prepopulated strings (YouTube playlist IDs)
+    var strings = [
+      //"PLuWIxgNYqm0ketpCdUpLK4zjreYpDlLoE",
+      //"PLuWIxgNYqm0lwRXD3Sqe2_ZryiljuW-L9",
+      //"PLuWIxgNYqm0lnbXjnFF3bdEBbRHkr-R3k",
+      //"PLuWIxgNYqm0mQd_Z6eYbNa8Riyjl0znGC",
+      //"PLuWIxgNYqm0lXxPLZ9hBT9M46m53H5GES",
+      //"PLuWIxgNYqm0kV69z-SJHDwAuebGmIhbp6"
+
+        "Tx1sqYc3qas&list=RDTx1sqYc3qas&start_radio=1",
+        "Ah0Ys50CqO8&list=RDQMF2R40qRK-qk&start_radio=1",
+        "LjF9IqvXDjY&list=RDLjF9IqvXDjY&start_radio=1",
+        "N44lUwwvNFs&list=RDN44lUwwvNFs&start_radio=1",
+        "jfioZtZ9iiE&list=RDjfioZtZ9iiE&start_radio=1",
+        "RO_9LDW4YhM&list=RDRO_9LDW4YhM&start_radio=1",
+        "ZtD9bQIjE_k&list=RDZtD9bQIjE_k&start_radio=1",
+        "mj4cD5xn2n0&list=RD1e_j20yFAvo&start_radio=1",
+        "BC19kwABFwc&list=RD4RkM-v2i5Ew&start_radio=1",
+        "4RkM-v2i5Ew&list=RDBC19kwABFwc&start_radio=1",
+        "kEDZZin4_eM&list=RD1e_j20yFAvo&start_radio=1"
+
+    ];
+
+    function getCookie(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+    function setNextPlaylistID() {
+      var currentIndex = strings.indexOf(getCookie("playlistID"));
+
+      // If the cookie exists and its value is one of the playlist IDs in the array
+      if (currentIndex !== -1) {
+        // Pick the next playlist ID in the array (loop back to the first one if necessary)
+        var nextIndex = (currentIndex + 1) % strings.length;
+        var nextPlaylist = strings[nextIndex];
+
+        // Save the next playlist ID as the cookie
+        document.cookie = "playlistID=" + nextPlaylist + "; path=/";
+
+        // Update the src attribute of the iframe to the next playlist https://www.youtube.com/embed/ZtD9bQIjE_k?si=iq6YzJ9GtYH3_I5r
+        // https://www.youtube-nocookie.com/embed?v=jfioZtZ9iiE&list=RDjfioZtZ9iiE
+        // document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/videoseries?list=" + nextPlaylist;
+        // document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/" + nextPlaylist;
+        // https://www.youtube-nocookie.com/embed/?v=Tx1sqYc3qas&list=RDTx1sqYc3qas
+        // https://www.youtube.com/watch?v=mj4cD5xn2n0&list=RD1e_j20yFAvo&start_radio=1  
+          document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/?v=" + nextPlaylist;
+      } else {
+        // If the cookie doesn't exist or its value is not in the array, generate a random playlist as before
+        generateRandomPlaylist();
+      }
+    }
+
+    function generateRandomPlaylist() {
+      // Get a random index from the strings array
+      var randomIndex = Math.floor(Math.random() * strings.length);
+
+      // Get the string at the random index
+      var randomPlaylist = strings[randomIndex];
+
+      // Save the playlist ID as a cookie
+      document.cookie = "playlistID=" + randomPlaylist + "; path=/";
+
+      // Set the src attribute of the iframe to the random playlist
+      // document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/videoseries?list=" + randomPlaylist;
+      document.getElementById("playlistiframe").src = "https://www.youtube-nocookie.com/embed/?v=" + randomPlaylist;
+    }
+
+    // Call setNextPlaylistID() when the page loads
+    window.addEventListener("load", setNextPlaylistID);
+  </script>
+</body>
+</html>
